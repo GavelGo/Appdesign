@@ -14,20 +14,20 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".Activity.SplashScreen">
+        <activity android:name=".View.Activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activity.MainActivity"></activity>
-        <activity android:name=".Activity.UserLogin"></activity>
-        <activity android:name=".Activity.SignupActivity"></activity>
-        <activity android:name=".Activity.ResetPassordActivity"></activity>
-        <activity android:name=".Activity.AddPartnerInformation"></activity>
-        <activity android:name=".Activity.AddProductActivity"></activity>
-        <activity android:name=".Activity.AddConsumerInformation"></activity>
+        <activity android:name=".View.Activity.MainActivity"></activity>
+        <activity android:name=".View.Activity.UserLogin"></activity>
+        <activity android:name=".View.Activity.SignupActivity"></activity>
+        <activity android:name=".View.Activity.ResetPassordActivity"></activity>
+        <activity android:name=".View.Activity.AddPartnerInformation"></activity>
+        <activity android:name=".View.Activity.AddProductActivity"></activity>
+        <activity android:name=".View.Activity.AddConsumerInformation"></activity>
 
 
     </application>
