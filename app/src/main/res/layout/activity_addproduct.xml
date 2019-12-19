@@ -94,6 +94,60 @@
 
     </LinearLayout>
 
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+      >
+
+
+        <TextView
+            android:id="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:text="Price:"
+            android:layout_centerVertical="true"
+            android:textAllCaps="false"
+            android:textSize="@dimen/_12sdp" />
+
+        <EditText
+            android:layout_toRightOf="@+id/priceTV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/_5sdp"
+            android:hint="$19.99" />
+
+        <Spinner
+            android:id="@+id/unitSP"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:entries="@array/selectunit"
+          android:layout_gravity="center_vertical"></Spinner>
+
+    </RelativeLayout>
+
+
+    <AutoCompleteTextView
+        android:id="@+id/autocompleteTV"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="@dimen/_12sdp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginRight="@dimen/_50sdp"
+        android:layout_gravity="center_horizontal"
+        android:hint="Select your keywords"
+        android:layout_marginTop="5dp"
+        android:ems="10" />
+
+
     <EditText
         android:id="@+id/descriptionET"
         android:layout_width="match_parent"

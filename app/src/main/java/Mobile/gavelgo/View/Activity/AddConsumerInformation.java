@@ -11,8 +11,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
+
 import java.util.List;
+
 import Mobile.gavelgo.Controller.Utills;
 import Mobile.gavelgo.R;
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -49,6 +52,8 @@ public class AddConsumerInformation extends Activity implements View.OnClickList
         saveBT.setOnClickListener(this);
         cancelBT.setOnClickListener(this);
         browseBT.setOnClickListener(this);
+
+
     }
 
     @Override

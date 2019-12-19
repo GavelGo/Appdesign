@@ -1,23 +1,21 @@
 package Mobile.gavelgo.View.Adapter
 
 import Mobile.gavelgo.R
-
 import android.content.Context
 import android.graphics.Point
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.ImageView
 import android.widget.LinearLayout
+import android.widget.PopupMenu
 import android.widget.TextView
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
 
 
-class HomeAdapter(internal var context: Context?,internal  var tag:String) : RecyclerView.Adapter<HomeAdapter.ViewHolder>() {
+class HomeAdapter(internal var context: Context?,internal  var tag:String) : RecyclerView.Adapter<HomeAdapter.ViewHolder>(),View.OnClickListener {
 
     override fun onCreateViewHolder(viewGroup: ViewGroup, viewType: Int): ViewHolder {
 
@@ -29,7 +27,6 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
     override fun getItemCount(): Int {
         return 30
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val wm = context!!.getSystemService(Context.WINDOW_SERVICE) as WindowManager
         val display = wm.defaultDisplay
@@ -38,11 +35,12 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
         val width: Int = size.x
         val height: Int = size.y
         var finalwidth = width / 3
+        var finalhight = width / 4
 
-        holder.imageIV.setLayoutParams(LinearLayout.LayoutParams(finalwidth, finalwidth))
+        holder.imageIV.setLayoutParams(LinearLayout.LayoutParams(finalwidth, finalhight))
 
         if (tag.equals("restuarent")){
-            holder.itemTV.setText("R")
+          //  holder.itemTV.setText("R")
 
             holder.imageIV.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -54,7 +52,7 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
 
         }
         else  if (tag.equals("auto")) {
-            holder.itemTV.setText("A")
+          //  holder.itemTV.setText("A")
 
             holder.imageIV.setImageDrawable(
                     ContextCompat.getDrawable(
@@ -65,9 +63,7 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
 
         }
         else  if (tag.equals("more")) {
-            holder.itemTV.setText("M")
-
-
+          //  holder.itemTV.setText("M")
             holder.imageIV.setImageDrawable(
                     ContextCompat.getDrawable(
                             context!!, // Context
@@ -76,7 +72,7 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
             )
         }
         else  {
-            holder.itemTV.setText("E")
+         //   holder.itemTV.setText("E")
             holder.imageIV.setImageDrawable(
                     ContextCompat.getDrawable(
                             context!!, // Context
@@ -85,6 +81,7 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
             )
         }
 
+        holder.menuIV.setOnClickListener(this)
 
     }
 
@@ -92,9 +89,37 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var imageIV: ImageView
         var itemTV: TextView
+        var menuIV: ImageView
         init {
-            imageIV = view.findViewById(R.id.imageIV);
-            itemTV = view.findViewById(R.id.itemTV);
+            imageIV = view.findViewById(R.id.imageIV)
+            itemTV = view.findViewById(R.id.itemTV)
+            menuIV = view.findViewById(R.id.menuIV)
         }
+    }
+
+
+
+
+    override fun onClick(v: View?) {
+
+
+            when (v!!.id){
+
+                R.id.menuIV->{
+
+                    showPopup(v)
+                }
+
+
+        }
+
+
+    }
+
+    fun showPopup(v: View) {
+        val popup = PopupMenu(context, v)
+        val inflater = popup.menuInflater
+        inflater.inflate(R.menu.productmenu, popup.menu)
+        popup.show()
     }
 }

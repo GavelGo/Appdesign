@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.PasswordTransformationMethod;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -13,7 +14,12 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+import Mobile.gavelgo.Controller.Apis.UserRegisterApi;
 import Mobile.gavelgo.Controller.Utills;
+import Mobile.gavelgo.Model.RegisterUserResponse;
 import Mobile.gavelgo.R;
 
 public class SignupActivity extends Activity implements View.OnClickListener {
@@ -21,7 +27,7 @@ public class SignupActivity extends Activity implements View.OnClickListener {
     TextView loginTV;
     EditText usernameET, emailET, passET, conpassET;
     Button signupBT;
-    ImageView passIV,conpassIV;
+    ImageView passIV, conpassIV;
     Spinner userSP;
     String selected_position;
 
@@ -50,9 +56,9 @@ public class SignupActivity extends Activity implements View.OnClickListener {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-                selected_position=adapterView.getSelectedItem()+"";
+                selected_position = adapterView.getSelectedItem() + "";
 
-              //  Toast.makeText(SignupActivity.this,adapterView.getSelectedItem()+"",Toast.LENGTH_SHORT).show();
+                //  Toast.makeText(SignupActivity.this,adapterView.getSelectedItem()+"",Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -61,23 +67,6 @@ public class SignupActivity extends Activity implements View.OnClickListener {
             }
         });
 
-
-       /* userSP.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-              *//*  selected_position=adapterView.getSelectedItem().toString();
-
-                Toast.makeText(SignupActivity.this,selected_position,Toast.LENGTH_SHORT).show();
-*//*
-                switch (i){
-
-                    case 0:
-
-                }
-            }
-        });
-*/
     }
 
     @Override
@@ -87,7 +76,7 @@ public class SignupActivity extends Activity implements View.OnClickListener {
 
             case R.id.loginTV:
 
-               onBackPressed();
+                onBackPressed();
 
                 break;
 
@@ -130,50 +119,77 @@ public class SignupActivity extends Activity implements View.OnClickListener {
 
                 if (usernameET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter username");
-                }
-
-                else if (emailET.getText().toString().equals("")) {
+                } else if (emailET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter email");
-                }
-
-                else if (isEmailValid(emailET.getText().toString()) == false) {
+                } else if (isEmailValid(emailET.getText().toString()) == false) {
                     Utills.showalerter(SignupActivity.this, "Please enter valid email");
 
-                }
-
-                else if (passET.getText().toString().equals("")) {
+                } else if (passET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter password");
-                }else if (conpassET.getText().toString().equals("")) {
+                } else if (conpassET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter confirm password");
-                }
-                else if (!conpassET.getText().toString().equals(passET.getText().toString())) {
+                } else if (!conpassET.getText().toString().equals(passET.getText().toString())) {
                     Utills.showalerter(SignupActivity.this, "Password does not matched");
-                }
-                else if (selected_position.equals("Select user type")){
+                } else if (selected_position.equals("Select user type")) {
 
                     Utills.showalerter(SignupActivity.this, "Please select any user type");
 
-                }
-                else if (selected_position.equals("Consumer")){
+                } else if (selected_position.equals("Consumer")) {
 
-                    Intent intent1=new Intent(SignupActivity.this,AddConsumerInformation.class);
+                    registerUserApi();
+
+                } else {
+
+                    Intent intent1 = new Intent(SignupActivity.this, AddPartnerInformation.class);
                     startActivity(intent1);
 
                 }
-
-                else{
-
-                    Intent intent1=new Intent(SignupActivity.this,AddPartnerInformation.class);
-                    startActivity(intent1);
-
-                }
-
-
                 break;
         }
-
-
     }
+
+    private void registerUserApi() {
+
+        UserRegisterApi userRegisterApi = new UserRegisterApi();
+
+        if (Utills.isConnectingToInternet(SignupActivity.this)) {
+            try {
+                Utills.showDialog(SignupActivity.this);
+                userRegisterApi.home_splash(SignupActivity.this, usernameET.getText().toString(), emailET.getText().toString(), passET.getText().toString(), new UserRegisterApi.RegisterUser_CallBack() {
+
+
+                    @Override
+                    public void onSuccess(@Nullable RegisterUserResponse body) {
+
+                        Log.d("tag","Api "+ "success");
+                        Utills.progressDialog_dismiss(SignupActivity.this);
+
+                        Intent intent1 = new Intent(SignupActivity.this, AddConsumerInformation.class);
+                        startActivity(intent1);
+
+                    }
+
+                    @Override
+
+                    public void onFailure(@NotNull String body) {
+
+                        Utills.progressDialog_dismiss(SignupActivity.this);
+                        Log.d("tag","Api"+ "faliure msg="+body);
+
+
+                    }
+
+
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utills.showalerter(this, "Please check your internet connection");
+        }
+    }
+
 
     public Boolean isEmailValid(String email) {
         return android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches();
