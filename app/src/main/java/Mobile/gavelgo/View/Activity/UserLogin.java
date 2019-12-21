@@ -22,9 +22,11 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
 import Mobile.gavelgo.Controller.Apis.AuthApi;
+import Mobile.gavelgo.Controller.Apis.LoginApi;
 import Mobile.gavelgo.Controller.Apis.UserRegisterApi;
 import Mobile.gavelgo.Controller.Utills;
 import Mobile.gavelgo.Model.AuthResponse;
+import Mobile.gavelgo.Model.LoginResponse;
 import Mobile.gavelgo.Model.RegisterUserResponse;
 import Mobile.gavelgo.R;
 
@@ -182,10 +184,7 @@ public class UserLogin extends Activity implements View.OnClickListener {
     }
 
     private void authApis() {
-
-
         AuthApi authApi = new AuthApi();
-
         if (Utills.isConnectingToInternet(UserLogin.this)) {
             try {
                 Utills.showDialog(UserLogin.this);
@@ -196,7 +195,14 @@ public class UserLogin extends Activity implements View.OnClickListener {
                     public void onSuccess(@Nullable AuthResponse body) {
 
                         Log.d("tag","Api "+ "success");
-                        Utills.progressDialog_dismiss(UserLogin.this);
+
+
+                        String token=body.getToken();
+
+                        //loginApi("Bearer "+token);
+
+                        Intent intent = new Intent(UserLogin.this, MainActivity.class);
+                        startActivity(intent);
 
                     }
 
@@ -220,6 +226,51 @@ public class UserLogin extends Activity implements View.OnClickListener {
             Utills.showalerter(this, "Please check your internet connection");
         }
 
+
+    }
+
+    private void loginApi(String token) {
+
+
+        LoginApi loginapi = new LoginApi();
+
+        if (Utills.isConnectingToInternet(UserLogin.this)) {
+            try {
+
+                loginapi.login_const(UserLogin.this,token,emailET.getText().toString(), passET.getText().toString(), new LoginApi.Login_CallBack() {
+
+
+                    @Override
+                    public void onSuccess(@Nullable LoginResponse body) {
+
+                        Log.d("tag","LoginApi "+ "success");
+                        Utills.progressDialog_dismiss(UserLogin.this);
+
+
+                        Intent intent = new Intent(UserLogin.this, MainActivity.class);
+                        startActivity(intent);
+
+                    }
+
+                    @Override
+
+                    public void onFailure(@NotNull String body) {
+
+                        Utills.progressDialog_dismiss(UserLogin.this);
+                        Log.d("tag","LoginApi"+ "faliure msg="+body);
+
+
+                    }
+
+
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utills.showalerter(this, "Please check your internet connection");
+        }
 
     }
 

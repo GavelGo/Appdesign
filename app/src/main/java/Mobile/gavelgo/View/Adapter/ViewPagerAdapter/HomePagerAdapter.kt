@@ -5,9 +5,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 
-class HomePagerAdapter(internal var context:Context?,internal  var fm: FragmentManager): FragmentPagerAdapter(fm) {
-
-    override fun getItem(position:Int): Fragment? {
+class HomePagerAdapter(internal var context : Context?,internal  var fm: FragmentManager): FragmentPagerAdapter(fm) {
+    override fun getItem(position:Int): Fragment {
         var fragment: Fragment? = null
 
         if (position == 0)
@@ -33,7 +32,7 @@ class HomePagerAdapter(internal var context:Context?,internal  var fm: FragmentM
         }
 
 
-        return fragment
+        return fragment!!
     }
 
     override fun getCount(): Int {

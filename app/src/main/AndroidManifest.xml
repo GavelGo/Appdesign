@@ -33,6 +33,7 @@
         <activity android:name=".View.Activity.AddPartnerInformation"></activity>
         <activity android:name=".View.Activity.AddProductActivity"></activity>
         <activity android:name=".View.Activity.AddConsumerInformation"></activity>
+        <activity android:name=".View.Activity.ProductDetail"></activity>
 
 
     </application>

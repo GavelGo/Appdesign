@@ -1,7 +1,10 @@
 package Mobile.gavelgo.View.Adapter
 
 import Mobile.gavelgo.R
+import Mobile.gavelgo.View.Activity.MainActivity
+import Mobile.gavelgo.View.Activity.ProductDetail
 import android.content.Context
+import android.content.Intent
 import android.graphics.Point
 import android.view.LayoutInflater
 import android.view.View
@@ -82,6 +85,7 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
         }
 
         holder.menuIV.setOnClickListener(this)
+        holder.imageIV.setOnClickListener(this)
 
     }
 
@@ -108,6 +112,13 @@ class HomeAdapter(internal var context: Context?,internal  var tag:String) : Rec
                 R.id.menuIV->{
 
                     showPopup(v)
+                }
+                R.id.imageIV->{
+
+                    //loginApi("Bearer "+token);
+                    val intent = Intent(context, ProductDetail::class.java)
+                    context!!.startActivity(intent)
+
                 }
 
 
