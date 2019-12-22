@@ -1,22 +1,19 @@
 package Mobile.gavelgo.View.Activity;
 
+import android.os.Bundle;
+import android.view.MenuItem;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
-
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import android.app.Activity;
-import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
-
+import Mobile.gavelgo.R;
 import Mobile.gavelgo.View.Fragment.AlertFragment;
 import Mobile.gavelgo.View.Fragment.ChatFragment;
 import Mobile.gavelgo.View.Fragment.HomeFragment;
 import Mobile.gavelgo.View.Fragment.SettingsFragment;
-import Mobile.gavelgo.R;
 
 public class MainActivity extends FragmentActivity {
     BottomNavigationView bottomNavigationView;

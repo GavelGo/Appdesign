@@ -7,7 +7,10 @@ import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,9 +18,16 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
 import java.util.List;
 
+import Mobile.gavelgo.Controller.Apis.ProductCategoryApi;
+import Mobile.gavelgo.Controller.Apis.UserRegisterApi;
 import Mobile.gavelgo.Controller.Utills;
+import Mobile.gavelgo.Model.ProductCategoryResponse;
+import Mobile.gavelgo.Model.RegisterUserResponse;
 import Mobile.gavelgo.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
@@ -28,9 +38,13 @@ public class AddProductActivity extends Activity implements View.OnClickListener
     Spinner categorySP,subcategorySP;
     CircleImageView profileIV;
     Button browseBT,saveproductBT,cancelBT;
+    AutoCompleteTextView autocompleteTV;
 
     int SELECT_IMAGE=1;
     String selectedImagePath;
+
+    String[] keywords = {"dealer", "private owner", "parts", "used", "brand new", "insurance quote"};
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,10 +58,60 @@ public class AddProductActivity extends Activity implements View.OnClickListener
         browseBT=(Button) findViewById(R.id.browseBT);
         saveproductBT=(Button) findViewById(R.id.saveproductBT);
         cancelBT=(Button) findViewById(R.id.cancelBT);
+        autocompleteTV=(AutoCompleteTextView) findViewById(R.id.autocompleteTV);
 
         browseBT.setOnClickListener(this);
         saveproductBT.setOnClickListener(this);
         cancelBT.setOnClickListener(this);
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.select_autocomplete_item, keywords);
+
+        //Getting the instance of AutoCompleteTextView
+        //AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
+        autocompleteTV.setThreshold(1);//will start working from first character
+        autocompleteTV.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
+       // actv.setTextColor(Color.RED);
+
+        productCategoryListApi();
+
+    }
+
+    private void productCategoryListApi() {
+
+        ProductCategoryApi productCategoryApi = new ProductCategoryApi();
+
+        if (Utills.isConnectingToInternet(AddProductActivity.this)) {
+            try {
+                Utills.showDialog(AddProductActivity.this);
+                productCategoryApi.productcategory_const(AddProductActivity.this,  new ProductCategoryApi.ProductCategory_CallBack(){
+
+
+                    @Override
+                    public void onSuccess(@Nullable ProductCategoryResponse body) {
+
+                        Log.d("tag","Api "+ "success");
+                        Utills.progressDialog_dismiss(AddProductActivity.this);
+
+                    }
+
+                    @Override
+
+                    public void onFailure(@NotNull String body) {
+
+                        Utills.progressDialog_dismiss(AddProductActivity.this);
+                        Log.d("tag","Api"+ "faliure msg="+body);
+
+                    }
+
+                });
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            Utills.showalerter(this, "Please check your internet connection");
+        }
+
 
     }
 

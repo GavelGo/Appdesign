@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">Gavel.go</string>
+    <string name="Pleasewait">Please wait</string>
 
     <string-array name="usertype">
         <item>Select user type</item>
@@ -19,6 +20,12 @@
     <item>A</item>
     <item>B</item>
     <item>C</item>
+    </string-array>
+    <string-array name="selectunit">
+        <item>Unit</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
     </string-array>
 
 </resources>
