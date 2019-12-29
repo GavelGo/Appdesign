@@ -185,6 +185,7 @@
             android:textColor="@color/colorWhite"
             android:text="Get this deal"/>
         <Button
+            android:id="@+id/contactsellBT"
             android:layout_width="0dp"
             android:layout_height="@dimen/_35sdp"
             android:layout_weight="1"

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/headerRL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/colorAccent">
+
+        <RelativeLayout
+            android:id="@+id/backRL"
+            android:layout_width="@dimen/_35sdp"
+            android:layout_height="@dimen/_35sdp">
+
+            <ImageView
+                android:layout_width="@dimen/_15sdp"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/back"/>
+        </RelativeLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Oil Change"
+            android:textColor="@color/colorWhite"
+            android:layout_centerInParent="true"/>
+
+
+        <ImageView
+            android:id="@+id/phonecallIV"
+            android:layout_toLeftOf="@+id/menuIV"
+            android:layout_width="@dimen/_17sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:tint="@color/colorWhite"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/call"/>
+
+        <ImageView
+            android:id="@+id/menuIV"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_17sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@drawable/menu"/>
+
+    </RelativeLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/msgRV"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_10sdp"
+        android:layout_below="@+id/headerRL"
+        android:layout_above="@+id/bottomRL">
+    </androidx.recyclerview.widget.RecyclerView>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomRL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite"
+        android:layout_marginBottom="@dimen/_10sdp"
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/plusIV"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="@dimen/_10sdp"
+           android:text="+"
+            android:textSize="@dimen/_25sdp"/>
+
+
+        <EditText
+            android:id="@+id/messageET"
+            android:layout_toRightOf="@+id/plusIV"
+            android:layout_marginLeft="@dimen/_8sdp"
+         android:layout_marginRight="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:layout_toLeftOf="@+id/sendIV"
+            android:textSize="@dimen/_12sdp"
+            android:hint="Add text to this message"
+            android:singleLine="true"
+            android:background="@null"/>
+
+
+        <ImageView
+            android:id="@+id/sendIV"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+
+            android:layout_marginRight="@dimen/_10sdp"
+            android:src="@drawable/send"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

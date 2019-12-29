@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+<LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_20sdp"
         android:orientation="horizontal">
 
         <TextView
@@ -67,7 +76,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="@dimen/_5sdp"
         android:layout_marginTop="@dimen/_10sdp"
-        android:text="Add product photo" />
+        android:text="Add product 3 photos as most" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -91,6 +100,38 @@
             android:layout_marginLeft="@dimen/_5sdp"
             android:text="Browse"
             android:textAllCaps="false" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="@dimen/_50sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginRight="@dimen/_50sdp">
+
+        <ImageView
+            android:id="@+id/firstimageIV"
+            android:visibility="gone"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp" />
+        <ImageView
+            android:id="@+id/secondimageIV"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp" />
+
+        <ImageView
+            android:id="@+id/thirdimageIV"
+            android:visibility="gone"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:src="@drawable/ic_launcher_background"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp" />
 
     </LinearLayout>
 
@@ -151,7 +192,7 @@
     <EditText
         android:id="@+id/descriptionET"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/_100sdp"
+        android:layout_height="@dimen/_70sdp"
         android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_50sdp"
@@ -169,6 +210,7 @@
         android:layout_marginLeft="@dimen/_50sdp"
         android:layout_marginTop="@dimen/_10sdp"
         android:layout_marginRight="@dimen/_50sdp"
+        android:layout_marginBottom="@dimen/_10sdp"
         android:weightSum="2">
 
         <Button
@@ -196,3 +238,5 @@
     </LinearLayout>
 
 </LinearLayout>
+
+</ScrollView>

@@ -4,6 +4,8 @@ import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,14 +15,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.List;
 
 import Mobile.gavelgo.Controller.Apis.ProductCategoryApi;
@@ -30,15 +37,18 @@ import Mobile.gavelgo.Model.ProductCategoryResponse;
 import Mobile.gavelgo.Model.RegisterUserResponse;
 import Mobile.gavelgo.R;
 import de.hdodenhof.circleimageview.CircleImageView;
+import gun0912.tedbottompicker.TedBottomPicker;
+import gun0912.tedbottompicker.TedBottomSheetDialogFragment;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
 
-public class AddProductActivity extends Activity implements View.OnClickListener,EasyPermissions.PermissionCallbacks {
+public class AddProductActivity extends FragmentActivity implements View.OnClickListener,EasyPermissions.PermissionCallbacks {
     EditText productnameET,descriptionET;
     Spinner categorySP,subcategorySP;
     CircleImageView profileIV;
     Button browseBT,saveproductBT,cancelBT;
     AutoCompleteTextView autocompleteTV;
+    ImageView firstimageIV,secondimageIV,thirdimageIV;
 
     int SELECT_IMAGE=1;
     String selectedImagePath;
@@ -51,6 +61,9 @@ public class AddProductActivity extends Activity implements View.OnClickListener
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_addproduct);
         productnameET=(EditText)findViewById(R.id.productnameET);
+        firstimageIV=(ImageView) findViewById(R.id.firstimageIV);
+        secondimageIV=(ImageView) findViewById(R.id.secondimageIV);
+        thirdimageIV=(ImageView) findViewById(R.id.thirdimageIV);
         descriptionET=(EditText)findViewById(R.id.descriptionET);
         categorySP=(Spinner) findViewById(R.id.categorySP);
         subcategorySP=(Spinner) findViewById(R.id.subcategorySP);
@@ -159,19 +172,141 @@ public class AddProductActivity extends Activity implements View.OnClickListener
 
     @AfterPermissionGranted(123)
     private void opengallery() {
-        String[]perms={Manifest.permission.READ_EXTERNAL_STORAGE};
+
+
+
+        String[]perms={Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
         if (EasyPermissions.hasPermissions(this,perms)){
-            Intent intent = new Intent();
+
+            open_Gallery();
+
+    /*        Intent intent = new Intent();
             intent.setType("image/*");
             intent.setAction(Intent.ACTION_GET_CONTENT);
-            startActivityForResult(Intent.createChooser(intent, "Select Picture"),SELECT_IMAGE);
+            startActivityForResult(Intent.createChooser(intent, "Select Picture"),SELECT_IMAGE);*/
 
         }else{
 
-            EasyPermissions.requestPermissions(this,"We need a permission from access phone gallery photos",
-                    123,perms);
+            EasyPermissions.requestPermissions( this,"We need a permission from access phone gallery photos", 123,perms);
         }
+    }
+
+    private void open_Gallery() {
+
+        List<Uri>selectedUriList=null;
+
+        TedBottomPicker.with(AddProductActivity.this)
+                .setPeekHeight(1600)
+                .setSelectMaxCount(3)
+                .showTitle(false)
+                .setCompleteButtonText("Done")
+                .setEmptySelectionText("No Select")
+                .setSelectedUriList(selectedUriList)
+                .showMultiImage(new TedBottomSheetDialogFragment.OnMultiImageSelectedListener() {
+                    @Override
+                    public void onImagesSelected(List<Uri> uriList) {
+                        // here is selected image uri list
+
+                        Log.d("tag","selectedimagesize="+uriList.size());
+                        Log.d("tag","selectedimage="+uriList.get(0));
+                        //Log.d("tag","selectedimage="+uriList.get(1));
+
+
+                        if (uriList.size()==1){
+
+                            firstimageIV.setVisibility(View.VISIBLE);
+                            secondimageIV.setVisibility(View.GONE);
+                            thirdimageIV.setVisibility(View.GONE);
+
+                           File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
+                            //File imgFile = new  File(uriList.get(0).toString().replace("%20",""));
+
+
+                            if(imgFile.exists()){
+
+                               // getRealPathFromURI(uriList.get(0));
+
+                                //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+                                  firstimageIV.setImageURI(uriList.get(0));
+
+
+
+                            }
+
+                        }else if (uriList.size()==2){
+
+                            firstimageIV.setVisibility(View.VISIBLE);
+                            secondimageIV.setVisibility(View.VISIBLE);
+                            thirdimageIV.setVisibility(View.GONE);
+
+
+                            File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
+                            File imgFile2 = new  File(uriList.get(1).toString().replace("file://","").replace("%",""));
+
+                            if(imgFile.exists()){
+
+                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                                firstimageIV.setImageBitmap(myBitmap);
+
+                            }
+
+                            if(imgFile2.exists()){
+
+                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
+
+                                secondimageIV.setImageBitmap(myBitmap);
+
+                            }
+
+
+                        }
+
+                        else if (uriList.size()==3){
+
+                            firstimageIV.setVisibility(View.VISIBLE);
+                            secondimageIV.setVisibility(View.VISIBLE);
+                            thirdimageIV.setVisibility(View.VISIBLE);
+
+                            File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
+                            File imgFile2 = new  File(uriList.get(1).toString().replace("file://","").replace("%",""));
+                            File imgFile3 = new  File(uriList.get(2).toString().replace("file://","").replace("%",""));
+
+                            if(imgFile.exists()){
+
+                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
+
+                                firstimageIV.setImageBitmap(myBitmap);
+
+                            }
+
+                            if(imgFile2.exists()){
+
+                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
+
+                                secondimageIV.setImageBitmap(myBitmap);
+
+                            }
+
+                            if(imgFile3.exists()){
+
+                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile3.getAbsolutePath());
+
+                                thirdimageIV.setImageBitmap(myBitmap);
+
+                            }
+
+
+                        }
+
+
+
+                    }
+                });
+
+
+
     }
 
     @Override
@@ -209,5 +344,35 @@ public class AddProductActivity extends Activity implements View.OnClickListener
         int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
         cursor.moveToFirst();
         return cursor.getString(column_index);
+    }
+
+
+
+    public String getRealPathFromURI(Uri contentURI) {
+        String result;
+        Cursor cursor = getContentResolver().query(contentURI, null,
+                null, null, null);
+
+        if (cursor == null) { // Source is Dropbox or other similar local file
+            // path
+            result = contentURI.getPath();
+
+            firstimageIV.setImageURI(contentURI);
+        } else {
+            cursor.moveToFirst();
+            try {
+                int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
+                result = cursor.getString(idx);
+
+
+            } catch (Exception e) {
+               // AppLog.handleException(ImageHelper.class.getName(), e);
+                Toast.makeText(AddProductActivity.this,"image getting error", Toast.LENGTH_SHORT).show();
+
+                result = "";
+            }
+            cursor.close();
+        }
+        return result;
     }
 }
