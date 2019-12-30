@@ -3,16 +3,20 @@ package Mobile.gavelgo.View.Activity
 import Mobile.gavelgo.R
 import Mobile.gavelgo.View.Adapter.ViewPagerAdapter.ProductDetailPagerAdapter
 import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
 
 
-class ProductDetail:Activity(){
+class ProductDetail:Activity(),View.OnClickListener{
 
    lateinit var viewPager: ViewPager
+    lateinit var contactsellBT :Button
 
   lateinit  var sliderDotspanel: LinearLayout
     var dotscount = 0
@@ -23,7 +27,10 @@ class ProductDetail:Activity(){
         setContentView(R.layout.activity_productdetail)
 
         viewPager = findViewById(R.id.viewPager) as ViewPager
+        contactsellBT=findViewById(R.id.contactsellBT)
         sliderDotspanel = findViewById(R.id.SliderDots)
+
+        contactsellBT.setOnClickListener(this)
 
         val viewPagerAdapter = ProductDetailPagerAdapter(this)
 
@@ -54,6 +61,19 @@ class ProductDetail:Activity(){
             override fun onPageScrollStateChanged(state:Int) {
             }
         })
+    }
+
+    override fun onClick(view: View?) {
+        when(view!!.id){
+            R.id.contactsellBT->{
+
+                intent = Intent(applicationContext, MessagesActivity::class.java)
+                startActivity(intent)
+
+            }
+        }
+
+
     }
 
 }
