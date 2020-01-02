@@ -16,6 +16,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -48,7 +49,9 @@ public class AddProductActivity extends FragmentActivity implements View.OnClick
     CircleImageView profileIV;
     Button browseBT,saveproductBT,cancelBT;
     AutoCompleteTextView autocompleteTV;
-    ImageView firstimageIV,secondimageIV,thirdimageIV;
+    ImageView firstimageIV,secondimageIV,thirdimageIV,firstimgcrossIV,secondimgcrossIV,thirdimgcrossIV;
+
+    RelativeLayout firstimageRL,secondimageRL,thirdimageRL;
 
     int SELECT_IMAGE=1;
     String selectedImagePath;
@@ -71,11 +74,22 @@ public class AddProductActivity extends FragmentActivity implements View.OnClick
         browseBT=(Button) findViewById(R.id.browseBT);
         saveproductBT=(Button) findViewById(R.id.saveproductBT);
         cancelBT=(Button) findViewById(R.id.cancelBT);
+        firstimageRL=(RelativeLayout) findViewById(R.id.firstimageRL);
+        secondimageRL=(RelativeLayout) findViewById(R.id.secondimageRL);
+        thirdimageRL=(RelativeLayout) findViewById(R.id.thirdimageRL);
         autocompleteTV=(AutoCompleteTextView) findViewById(R.id.autocompleteTV);
+
+        firstimgcrossIV=(ImageView) findViewById(R.id.firstimgcrossIV);
+        secondimgcrossIV=(ImageView) findViewById(R.id.secondimgcrossIV);
+        thirdimgcrossIV=(ImageView) findViewById(R.id.thirdimgcrossIV);
 
         browseBT.setOnClickListener(this);
         saveproductBT.setOnClickListener(this);
         cancelBT.setOnClickListener(this);
+
+        firstimgcrossIV.setOnClickListener(this);
+        secondimgcrossIV.setOnClickListener(this);
+        thirdimgcrossIV.setOnClickListener(this);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,R.layout.select_autocomplete_item, keywords);
 
@@ -165,6 +179,24 @@ public class AddProductActivity extends FragmentActivity implements View.OnClick
                 opengallery();
 
                 break;
+
+            case R.id.firstimgcrossIV:
+
+                firstimageRL.setVisibility(View.GONE);
+
+                break;
+
+            case R.id.secondimgcrossIV:
+
+                secondimageRL.setVisibility(View.GONE);
+
+                break;
+
+                case R.id.thirdimgcrossIV:
+
+                    thirdimageRL.setVisibility(View.GONE);
+
+                    break ;
         }
     }
 
@@ -206,97 +238,40 @@ public class AddProductActivity extends FragmentActivity implements View.OnClick
                 .showMultiImage(new TedBottomSheetDialogFragment.OnMultiImageSelectedListener() {
                     @Override
                     public void onImagesSelected(List<Uri> uriList) {
-                        // here is selected image uri list
-
-                        Log.d("tag","selectedimagesize="+uriList.size());
-                        Log.d("tag","selectedimage="+uriList.get(0));
-                        //Log.d("tag","selectedimage="+uriList.get(1));
 
 
                         if (uriList.size()==1){
 
-                            firstimageIV.setVisibility(View.VISIBLE);
-                            secondimageIV.setVisibility(View.GONE);
-                            thirdimageIV.setVisibility(View.GONE);
 
-                           File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
-                            //File imgFile = new  File(uriList.get(0).toString().replace("%20",""));
+                            firstimageRL.setVisibility(View.VISIBLE);
+                            secondimageRL.setVisibility(View.GONE);
+                            thirdimageRL.setVisibility(View.GONE);
 
 
-                            if(imgFile.exists()){
+                            firstimageIV.setImageURI(Uri.fromFile(new File(uriList.get(0).getPath().toString())));
 
-                               // getRealPathFromURI(uriList.get(0));
-
-                                //Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-                                  firstimageIV.setImageURI(uriList.get(0));
-
-
-
-                            }
 
                         }else if (uriList.size()==2){
 
-                            firstimageIV.setVisibility(View.VISIBLE);
-                            secondimageIV.setVisibility(View.VISIBLE);
-                            thirdimageIV.setVisibility(View.GONE);
+                            firstimageRL.setVisibility(View.VISIBLE);
+                            secondimageRL.setVisibility(View.VISIBLE);
+                            thirdimageRL.setVisibility(View.GONE);
 
-
-                            File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
-                            File imgFile2 = new  File(uriList.get(1).toString().replace("file://","").replace("%",""));
-
-                            if(imgFile.exists()){
-
-                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                                firstimageIV.setImageBitmap(myBitmap);
-
-                            }
-
-                            if(imgFile2.exists()){
-
-                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
-
-                                secondimageIV.setImageBitmap(myBitmap);
-
-                            }
+                            firstimageIV.setImageURI(Uri.fromFile(new File(uriList.get(0).getPath().toString())));
+                            secondimageIV.setImageURI(Uri.fromFile(new File(uriList.get(1).getPath().toString())));
 
 
                         }
 
                         else if (uriList.size()==3){
 
-                            firstimageIV.setVisibility(View.VISIBLE);
-                            secondimageIV.setVisibility(View.VISIBLE);
-                            thirdimageIV.setVisibility(View.VISIBLE);
+                            firstimageRL.setVisibility(View.VISIBLE);
+                            secondimageRL.setVisibility(View.VISIBLE);
+                            thirdimageRL.setVisibility(View.VISIBLE);
 
-                            File imgFile = new  File(uriList.get(0).toString().replace("file://","").replace("%",""));
-                            File imgFile2 = new  File(uriList.get(1).toString().replace("file://","").replace("%",""));
-                            File imgFile3 = new  File(uriList.get(2).toString().replace("file://","").replace("%",""));
-
-                            if(imgFile.exists()){
-
-                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile.getAbsolutePath());
-
-                                firstimageIV.setImageBitmap(myBitmap);
-
-                            }
-
-                            if(imgFile2.exists()){
-
-                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile2.getAbsolutePath());
-
-                                secondimageIV.setImageBitmap(myBitmap);
-
-                            }
-
-                            if(imgFile3.exists()){
-
-                                Bitmap myBitmap = BitmapFactory.decodeFile(imgFile3.getAbsolutePath());
-
-                                thirdimageIV.setImageBitmap(myBitmap);
-
-                            }
-
+                            firstimageIV.setImageURI(Uri.fromFile(new File(uriList.get(0).getPath().toString())));
+                            secondimageIV.setImageURI(Uri.fromFile(new File(uriList.get(1).getPath().toString())));
+                            thirdimageIV.setImageURI(Uri.fromFile(new File(uriList.get(2).getPath().toString())));
 
                         }
 
