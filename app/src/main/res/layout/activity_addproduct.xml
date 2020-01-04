@@ -86,11 +86,6 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profileIV"
-            android:layout_width="@dimen/_50sdp"
-            android:layout_height="@dimen/_50sdp"
-            android:src="@drawable/profileicon" />
 
         <Button
             android:id="@+id/browseBT"
