@@ -99,6 +99,7 @@
         android:layout_marginTop="@dimen/_10sdp"
         android:textSize="@dimen/_12sdp"
         android:inputType="phone"
+        android:maxLength="10"
         android:background="@drawable/edittext_background"
         android:singleLine="true"
         android:paddingLeft="@dimen/_10sdp"
@@ -120,6 +121,7 @@
             android:layout_height="@dimen/_35sdp"
             android:background="@drawable/edittext_background"
             android:layout_weight="1.3"
+            android:inputType="text"
             android:paddingLeft="@dimen/_10sdp"
             android:singleLine="true"
             android:textSize="@dimen/_12sdp"
@@ -155,6 +157,7 @@
             android:layout_weight="0.5"
             android:background="@drawable/edittext_background"
             android:hint="City"
+            android:inputType="text"
             android:paddingLeft="@dimen/_10sdp"
             android:singleLine="true"
             android:textSize="@dimen/_12sdp" />
@@ -167,6 +170,8 @@
             android:hint="State"
             android:layout_marginLeft="@dimen/_10sdp"
             android:singleLine="true"
+            android:inputType="text"
+
             android:textSize="@dimen/_12sdp"
             android:paddingLeft="@dimen/_10sdp"
             android:background="@drawable/edittext_background"/>

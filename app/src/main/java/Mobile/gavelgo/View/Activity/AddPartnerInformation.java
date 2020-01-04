@@ -141,7 +141,7 @@ public class AddPartnerInformation extends Activity implements View.OnClickListe
                 if (data != null) {
                     Uri selectedImageUri = data.getData();
                     selectedImagePath = getPath(selectedImageUri);
-                    System.out.println("Image Path : " + selectedImagePath);
+                    System.out.println("Image Path : " + selectedImageUri);
                     profileIV.setImageURI(selectedImageUri);
                 }
             } else if (resultCode == Activity.RESULT_CANCELED)  {
