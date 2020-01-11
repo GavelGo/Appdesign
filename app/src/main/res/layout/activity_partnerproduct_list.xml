@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/headerRL"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_35sdp"
+        android:background="@color/colorAccent">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="My Products"
+            android:textSize="@dimen/_12sdp"
+            android:layout_centerInParent="true"
+            android:textColor="@color/colorWhite"/>
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/productRV"
+        android:layout_above="@+id/bottomLL"
+        android:layout_below="@+id/headerRL"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_marginRight="@dimen/_5sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
+
+
+
+    <LinearLayout
+        android:id="@+id/bottomLL"
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_margin="@dimen/_10sdp"
+        android:weightSum="2">
+
+
+        <Button
+            android:id="@+id/addproductBT"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="Add Product"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/buttonbackground"/>
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:text="Sale statistics"
+            android:textColor="@color/colorWhite"
+            android:textAllCaps="false"
+            android:stateListAnimator="@null"
+            android:layout_height="@dimen/_35sdp"
+            android:background="@drawable/buttonbackground"/>
+
+    </LinearLayout>
+</RelativeLayout>

@@ -39,6 +39,7 @@
         <activity android:name=".View.Activity.AddConsumerInformation"></activity>
         <activity android:name=".View.Activity.ProductDetail"></activity>
         <activity android:name=".View.Activity.MessagesActivity"></activity>
+        <activity android:name=".View.Activity.PartnerProductList"></activity>
 
 
     </application>
