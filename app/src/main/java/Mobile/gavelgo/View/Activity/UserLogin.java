@@ -11,11 +11,13 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.EditorInfo;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import org.jetbrains.annotations.NotNull;
@@ -35,6 +37,8 @@ public class UserLogin extends Activity implements View.OnClickListener {
     private ImageView hidepassIV;
     private TextView Info, signupTV, forgotTV;
     private Button loginBT;
+    private Spinner userSP;
+    String selected_position="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class UserLogin extends Activity implements View.OnClickListener {
         hidepassIV = (ImageView) findViewById(R.id.hidepassIV);
         signupTV = (TextView) findViewById(R.id.signupTV);
         forgotTV = (TextView) findViewById(R.id.forgotTV);
+        userSP = (Spinner) findViewById(R.id.userSP);
 
         loginBT.setOnClickListener(this);
         hidepassIV.setOnClickListener(this);
@@ -69,6 +74,24 @@ public class UserLogin extends Activity implements View.OnClickListener {
                     return true;
                 }
                 return false;
+            }
+        });
+
+
+
+
+        userSP.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+
+                selected_position = adapterView.getSelectedItem() + "";
+
+                //  Toast.makeText(SignupActivity.this,adapterView.getSelectedItem()+"",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
             }
         });
     }
@@ -179,7 +202,24 @@ public class UserLogin extends Activity implements View.OnClickListener {
             Utills.showalerter(UserLogin.this, "Please enter password");
         }
         else {
-            authApis();
+           // authApis();
+
+            if (selected_position.equals("Select user type")){
+
+                Utills.showalerter(UserLogin.this, "Please Select any user type");
+
+
+            }
+            else if (selected_position.equals("Consumer")){
+
+                Intent intent = new Intent(UserLogin.this, MainActivity.class);
+                startActivity(intent);
+            }
+            else{
+
+                Intent intent = new Intent(UserLogin.this, PartnerProductList.class);
+                startActivity(intent);
+            }
         }
     }
 
