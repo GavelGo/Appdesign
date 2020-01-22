@@ -18,6 +18,7 @@ import java.util.List;
 
 import Mobile.gavelgo.Controller.Utills;
 import Mobile.gavelgo.R;
+import Mobile.gavelgo.View.Activity.AddProduct.AddProduct;
 import de.hdodenhof.circleimageview.CircleImageView;
 import pub.devrel.easypermissions.AfterPermissionGranted;
 import pub.devrel.easypermissions.EasyPermissions;
@@ -87,12 +88,14 @@ public class AddPartnerInformation extends Activity implements View.OnClickListe
 
             case R.id.addproductBT:
 
-                if (saveprofile == false) {
+                /*if (saveprofile == false) {
                     Utills.showalerter(AddPartnerInformation.this, "First save Profile information ");
                 } else {
                     Intent intent = new Intent(AddPartnerInformation.this, AddProductActivity.class);
                     startActivity(intent);
-                }
+                }*/
+                Intent intent = new Intent(AddPartnerInformation.this, AddProduct.class);
+                startActivity(intent);
 
                 break;
 

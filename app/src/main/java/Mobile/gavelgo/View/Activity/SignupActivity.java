@@ -117,7 +117,10 @@ public class SignupActivity extends Activity implements View.OnClickListener {
 
             case R.id.signupBT:
 
-                if (usernameET.getText().toString().equals("")) {
+                Intent intent1 = new Intent(SignupActivity.this, AddPartnerInformation.class);
+                startActivity(intent1);
+
+                /*if (usernameET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter username");
                 } else if (emailET.getText().toString().equals("")) {
                     Utills.showalerter(SignupActivity.this, "Please enter email");
@@ -143,7 +146,7 @@ public class SignupActivity extends Activity implements View.OnClickListener {
                     Intent intent1 = new Intent(SignupActivity.this, AddPartnerInformation.class);
                     startActivity(intent1);
 
-                }
+                }*/
                 break;
         }
     }

@@ -1,28 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-
     package="Mobile.gavelgo">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission. ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
-
 
     <application
         android:allowBackup="true"
         android:icon="@drawable/applogo"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:largeHeap="true"
-        android:usesCleartextTraffic="true"
-        android:theme="@style/AppTheme">
-
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".View.Activity.AddProduct.SelectCategoriesSelectionActivity"></activity>
+        <activity android:name=".View.Activity.AddProduct.AddProduct" />
         <activity android:name=".View.Activity.SplashScreen">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -30,18 +29,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.Activity.MainActivity"></activity>
-        <activity android:name=".View.Activity.UserLogin"></activity>
-        <activity android:name=".View.Activity.SignupActivity"></activity>
-        <activity android:name=".View.Activity.ResetPassordActivity"></activity>
-        <activity android:name=".View.Activity.AddPartnerInformation"></activity>
-        <activity android:name=".View.Activity.AddProductActivity"></activity>
-        <activity android:name=".View.Activity.AddConsumerInformation"></activity>
-        <activity android:name=".View.Activity.ProductDetail"></activity>
-        <activity android:name=".View.Activity.MessagesActivity"></activity>
-        <activity android:name=".View.Activity.PartnerProductList"></activity>
-
-
+        <activity android:name=".View.Activity.MainActivity" />
+        <activity android:name=".View.Activity.UserLogin" />
+        <activity android:name=".View.Activity.SignupActivity" />
+        <activity android:name=".View.Activity.ResetPassordActivity" />
+        <activity android:name=".View.Activity.AddPartnerInformation" />
+        <activity android:name=".View.Activity.AddProductActivity" />
+        <activity android:name=".View.Activity.AddConsumerInformation" />
+        <activity android:name=".View.Activity.ProductDetail" />
+        <activity android:name=".View.Activity.MessagesActivity" />
+        <activity android:name=".View.Activity.PartnerProductList" />
     </application>
 
 </manifest>

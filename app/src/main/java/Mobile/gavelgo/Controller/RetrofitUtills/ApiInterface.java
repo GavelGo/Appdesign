@@ -35,6 +35,9 @@ public interface ApiInterface {
 
     //@Headers("Content-Type: application/json")
     @GET("category")
-    Call<ProductCategoryResponse> getProductUser();
+    Call<ProductCategoryResponse> getCategory();
+
+    @GET("subCategory")
+    Call<ProductCategoryResponse> getSubcategories();
 
 }

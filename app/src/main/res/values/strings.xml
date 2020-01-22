@@ -16,10 +16,10 @@
     </string-array>
 
     <string-array name="Selectsubcategory">
-    <item>Select Subcategory</item>
-    <item>A</item>
-    <item>B</item>
-    <item>C</item>
+        <item>Select Subcategory</item>
+        <item>A</item>
+        <item>B</item>
+        <item>C</item>
     </string-array>
     <string-array name="selectunit">
         <item>Unit</item>

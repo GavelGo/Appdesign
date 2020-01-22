@@ -30,7 +30,7 @@ import java.io.IOException
 import java.util.*
 
 
-class HomeFragment  :Fragment(),View.OnClickListener {
+class HomeFragment :Fragment(),View.OnClickListener {
     lateinit var tabsTL: TabLayout
     lateinit var viewPager:ViewPager
     lateinit var homepageradapter:HomePagerAdapter
